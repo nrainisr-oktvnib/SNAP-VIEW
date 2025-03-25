@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AlbumSelector from "./components/AlbumSelector";
 import Gallery from "./components/Gallery";
 import SlideShow from "./components/SlideShow";
@@ -15,24 +16,22 @@ function App() {
     "HERO": [Seminar, Crc]
   };
 
-  // Panggil Zustand dengan selector
   const selectedAlbum = useStore((state) => state.selectedAlbum);
   const setSelectedAlbum = useStore((state) => state.setSelectedAlbum);
   const isPlaying = useStore((state) => state.isPlaying);
   const setIsPlaying = useStore((state) => state.setIsPlaying);
 
   return (
-    <div className="app-container">
-      <h1>SnapView</h1>
-      <AlbumSelector albums={Object.keys(albums)} onSelect={setSelectedAlbum} />
-
-      {selectedAlbum && (
-        <>
-          <Gallery images={albums[selectedAlbum]} isPlaying={isPlaying} />
-          <SlideShow isPlaying={isPlaying} onToggle={() => setIsPlaying(!isPlaying)} />
-        </>
-      )}
-    </div>
+    <Router>
+      <div className="app-container">
+        <h1>SnapView</h1>
+        <Routes>
+          <Route path="/" element={<AlbumSelector albums={Object.keys(albums)} onSelect={setSelectedAlbum} />} />
+          <Route path="/gallery" element={<Gallery images={albums[selectedAlbum] || []} isPlaying={isPlaying} />} />
+          <Route path="/slideshow" element={<SlideShow isPlaying={isPlaying} onToggle={() => setIsPlaying(!isPlaying)} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

@@ -1,17 +1,23 @@
+import { useNavigate } from "react-router-dom";
+
 function AlbumSelector({ albums, onSelect }) {
-    return (
-      <div className="album-container">
-        <h2>Pilih Album</h2>
-        <div className="album-buttons">
-          {albums.map((album) => (
-            <button key={album} onClick={() => onSelect(album)} className="album-btn">
-              {album}
-            </button>
-          ))}
-        </div>
+  const navigate = useNavigate();
+
+  const handleSelect = (album) => {
+    onSelect(album);
+    navigate("/gallery"); // Pindah ke halaman gallery setelah memilih album
+  };
+
+  return (
+    <div className="album-container">
+      <h2>Pilih Album</h2>
+      <div className="album-buttons">
+        {albums.map((album) => (
+          <button key={album} onClick={() => handleSelect(album)} className="album-btn">{album} </button>
+        ))}
       </div>
-    );
-  }
-  
-  export default AlbumSelector;
-  
+    </div>
+  );
+}
+
+export default AlbumSelector;
