@@ -10,7 +10,10 @@ const useStore = create((set) => ({
   // State untuk indeks gambar dalam gallery
   currentIndex: 0,
   setCurrentIndex: (index) => set({ currentIndex: index }),
+
+  
 }));
+
 
 
 
