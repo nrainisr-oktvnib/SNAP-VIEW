@@ -1,4 +1,3 @@
-import { useState } from "react";
 import AlbumSelector from "./components/AlbumSelector";
 import Gallery from "./components/Gallery";
 import SlideShow from "./components/SlideShow";
@@ -8,9 +7,7 @@ import Awan from "./assets/Awan.png";
 import Sunset from "./assets/Sunset.png";
 import Seminar from "./assets/Seminar.jpg";
 import Crc from "./assets/Crc.jpg";
-
-
-
+import useStore from "./store/store";
 
 function App() {
   const albums = {
@@ -18,8 +15,11 @@ function App() {
     "HERO": [Seminar, Crc]
   };
 
-  const [selectedAlbum, setSelectedAlbum] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false); // State untuk slideshow
+  // Panggil Zustand dengan selector
+  const selectedAlbum = useStore((state) => state.selectedAlbum);
+  const setSelectedAlbum = useStore((state) => state.setSelectedAlbum);
+  const isPlaying = useStore((state) => state.isPlaying);
+  const setIsPlaying = useStore((state) => state.setIsPlaying);
 
   return (
     <div className="app-container">

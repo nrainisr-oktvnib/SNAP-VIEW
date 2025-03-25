@@ -1,16 +1,14 @@
-import { useState } from "react";
+import useStore from "../store/store";  // Import Zustand store
 
 function Gallery({ images }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const { currentIndex, setCurrentIndex } = useStore();
 
   const nextImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setCurrentIndex((currentIndex + 1) % images.length);
   };
 
   const prevImage = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
   };
 
   return (
